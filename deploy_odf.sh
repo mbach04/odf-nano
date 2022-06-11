@@ -86,40 +86,17 @@ provisioner: kubernetes.io/no-provisioner
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: local-pv-vdb
+  name: local-pv-nvme1n1
 spec:
   capacity:
-    storage: 100Gi
+    storage: 930Gi
   volumeMode: Block
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
   storageClassName: localblock
   local:
-    path: /dev/vdb
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: node.openshift.io/os_id
-          operator: In
-          values:
-          - rhcos
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: local-pv-vdc
-spec:
-  capacity:
-    storage: 100Gi
-  volumeMode: Block
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName: localblock
-  local:
-    path: /dev/vdc
+    path: /dev/nvme1n1
   nodeAffinity:
     required:
       nodeSelectorTerms:
